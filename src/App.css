@@ -1,9 +1,22 @@
+body {
+    background-color: #86D7FF;
+    margin: 0;
+    padding: 0;
+}
+
 .header-panel {
     display: flex;
+    position: sticky;
+    top: 0;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     height: 50px;
+    background-color: white;
+    border: 3px solid #FFAF86;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .header-central-buttons {
@@ -19,4 +32,14 @@
 
 .logo-image {
     height: 75%;
+}
+
+.page-content {
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid #FFAF86;
+    width: 60%;
+    margin: 10px auto;
+    padding: 20px 50px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
