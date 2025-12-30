@@ -1,37 +1,58 @@
 import './App.css'
+import { Outlet } from 'react-router'
+import { Link } from 'react-router'
 
 function HeaderPanel() {
     return <div className="header-panel">
-        <img srcSet="/logo.svg" alt="logo" className="logo-image" />
-        <div className="header-central-buttons">
-            <div>Home</div>
-            <div>Catalog</div>
-            <div>About</div>
-            <div>Contact</div>
+        <div className="header-buttons-group ">
+            <Link to="/">
+                <img srcSet="/logo.svg" alt="logo" className="logo-image header-button" />
+            </Link>
         </div>
-        <div className="profile">Sign in</div>
+        <div className="header-buttons-group">
+            <Link to="/home">
+                <div className="header-button">Home</div>
+            </Link>
+            <Link to="/catalog">
+                <div className="header-button">Catalog</div>
+            </Link>
+            <Link to="/about">
+                <div className="header-button">About</div>
+            </Link>
+            <Link to="/contact">
+                <div className="header-button">Contact</div>
+            </Link>
+        </div>
+        <div className="header-buttons-group ">
+            <Link to="/sign-in">
+                <div className="header-button">Sign in</div>
+            </Link>
+        </div>
     </div>
 }
 
-function PageContent() {
-    return <div className="page-content"><MockContent /></div>
+function PageContentComponent() {
+    return <div className="page-content">
+        <Outlet />
+    </div>
 }
 
-function MockContent() {
+export function MockContentComponent({ randomWord }: { randomWord: string }) {
     let text = "";
     for (let i = 0; i < 1000; i++) {
-        text += "Lorem ipsum";
+        text += randomWord;
+        text += " ";
     }
     return <p>
         {text}
     </p>
 }
 
-function App() {
+export function App() {
     return (
         <>
             <HeaderPanel />
-            <PageContent />
+            <PageContentComponent />
         </>
     )
 }
