@@ -1,0 +1,43 @@
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.main-page {
+  display: flex;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	min-height: 100vh;
+}
+
+.left-panel {
+	margin: 0;
+	padding: 0;
+  background-color: #4c3dc0;
+	width: 200px;
+	height: 100vh;
+	border-right: 1px solid #000000;
+}
+
+.main-panel {
+	margin: 0;
+	padding: 0;
+	width: calc(100% - 200px);
+	height: 100vh;
+}
+
+.header {
+	margin: 0;
+	padding: 0;
+	height: 50px;
+  background-color: #538d58;
+	border-bottom: 1px solid #000000;
+}
+
+.content {
+	margin: 0;
+	padding: 0;
+  background-color: #ffffff;
+	height: calc(100vh - 100px);
+}
