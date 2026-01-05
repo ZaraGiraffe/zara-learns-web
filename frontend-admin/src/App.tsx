@@ -29,10 +29,10 @@ function Header() {
 }
 
 function handleSidebarIconClick() {
-  if (document.querySelector('.main-page')?.classList.contains('sidebar-closed')) {
-    document.querySelector('.main-page')?.classList.remove('sidebar-closed');
+  if (document.querySelector('.left-panel')?.classList.contains('sidebar-closed')) {
+    document.querySelector('.left-panel')?.classList.remove('sidebar-closed');
   } else {
-    document.querySelector('.main-page')?.classList.add('sidebar-closed');
+    document.querySelector('.left-panel')?.classList.add('sidebar-closed');
   }
 }
 

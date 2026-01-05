@@ -1,27 +1,31 @@
+:root {
+	--left-panel-width: 200px;
+}
+
 body {
 	margin: 0;
 	padding: 0;
 }
 
 .main-page {
-  display: grid;
+  display: flex;
 	width: 100%;
 	max-width: 100vw;
 	height: 100vh;
-	grid-template-columns: 200px 1fr;
-	grid-template-rows: 1fr;
-	transition: grid-template-columns 0.5s ease-in-out;
-}
-
-.main-page.sidebar-closed {
-	grid-template-columns: 0px 1fr;
 }
 
 .left-panel {
+	transition: margin-left 0.3s ease-in-out;
   background-color: #4c3dc0;
+	width: var(--left-panel-width);
+}
+
+.left-panel.sidebar-closed {
+	margin-left: calc(var(--left-panel-width) * -1);
 }
 
 .main-panel {
+	flex-grow: 1;
 	display: grid;
 	grid-template-rows: 50px 1fr;
 	grid-template-columns: 1fr;
