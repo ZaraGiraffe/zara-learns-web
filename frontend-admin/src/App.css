@@ -4,40 +4,33 @@ body {
 }
 
 .main-page {
-  display: flex;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	min-height: 100vh;
+  display: grid;
+	width: 100vw;
+	height: 100vh;
+	grid-template-columns: 200px 1fr;
+	grid-template-rows: 1fr;
 }
 
 .left-panel {
-	margin: 0;
-	padding: 0;
   background-color: #4c3dc0;
-	width: 200px;
-	height: 100vh;
-	border-right: 1px solid #000000;
 }
 
 .main-panel {
-	margin: 0;
-	padding: 0;
-	width: calc(100% - 200px);
-	height: 100vh;
+	display: grid;
+	grid-template-rows: 50px 1fr;
+	grid-template-columns: 1fr;
 }
 
 .header {
-	margin: 0;
-	padding: 0;
-	height: 50px;
   background-color: #538d58;
-	border-bottom: 1px solid #000000;
+	display: flex;
+	justify-content: space-between;
+}
+
+.header img {
+	margin: 10px;
 }
 
 .content {
-	margin: 0;
-	padding: 0;
   background-color: #ffffff;
-	height: calc(100vh - 100px);
 }

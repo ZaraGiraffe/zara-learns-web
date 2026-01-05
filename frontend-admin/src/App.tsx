@@ -23,7 +23,8 @@ function LeftPanel() {
 
 function Header() {
   return <div className='header'>
-    
+    <img src='./sidebar.svg' alt='sidebar' />
+    <img src='./person.svg' alt='person' />
   </div>
 }
 
