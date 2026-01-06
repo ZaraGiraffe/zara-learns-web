@@ -1,5 +1,6 @@
 import './App.css'
 import { Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function App() {
   return <>
@@ -13,11 +14,12 @@ function App() {
   </>
 }
 
-export default App
+export default App;
 
 function LeftPanel() {
   return <div className='left-panel'>
-
+    <Link to='/'>Home</Link>
+    <Link to='/catalog'>Catalog</Link>
   </div>
 }
 
@@ -38,6 +40,6 @@ function handleSidebarIconClick() {
 
 function Content() {
   return <div className='content'>
-    
+    <Outlet />
   </div>
 }
