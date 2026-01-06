@@ -17,16 +17,18 @@ function App() {
 export default App;
 
 function LeftPanel() {
-  return <div className='left-panel'>
-    <Link to='/'>Home</Link>
-    <Link to='/catalog'>Catalog</Link>
+  let leftPanelTailwindClasses = 'hover:bg-sky-600 active:bg-sky-700'
+  return <div className='left-panel bg-sky-500'>
+    <Link to='/' className={leftPanelTailwindClasses}>Home</Link>
+    <Link to='/catalog' className={leftPanelTailwindClasses}>Catalog</Link>
   </div>
 }
 
 function Header() {
-  return <div className='header'>
-    <img className='sidebar-icon' src='./sidebar.svg' alt='sidebar' onClick={handleSidebarIconClick} />
-    <img src='./person.svg' alt='person' />
+  let headerTailwindClasses = 'hover:bg-green-600 active:bg-green-700'
+  return <div className='header bg-green-500'>
+    <img className={'sidebar-icon header-button ' + headerTailwindClasses} src='./sidebar.svg' alt='sidebar' onClick={handleSidebarIconClick} />
+    <img className={'header-button ' + headerTailwindClasses} src='./person.svg' alt='person' />
   </div>
 }
 
