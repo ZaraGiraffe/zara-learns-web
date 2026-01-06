@@ -1,0 +1,23 @@
+.catalog-content {
+	display: grid;
+	grid-template-rows: 20px 1fr;
+	grid-template-columns: 1fr;
+}
+
+.catalog-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+}
+
+.catalog-buttons-group {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+
+.catalog-button {
+    height: 100%;
+}

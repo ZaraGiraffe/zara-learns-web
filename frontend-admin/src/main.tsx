@@ -2,7 +2,7 @@ import { RouterProvider } from 'react-router/dom'
 import { createBrowserRouter } from 'react-router'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import Catalog from './Catalog.tsx'
+import { NewItem, Catalog } from './Catalog.tsx'
 
 const router = createBrowserRouter([
   {
@@ -12,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: 'catalog',
         Component: Catalog
+      },
+      {
+        path: 'catalog/new',
+        Component: NewItem,
       }
     ]
   }

@@ -18,18 +18,20 @@ export default App;
 
 function LeftPanel() {
   let leftPanelTailwindClasses = 'hover:bg-sky-600 active:bg-sky-700'
-  return <div className='left-panel bg-sky-500 text-white'>
-    <Link to='/' className={leftPanelTailwindClasses}>Home</Link>
-    <Link to='/catalog' className={leftPanelTailwindClasses}>Catalog</Link>
-  </div>
-}
+  return <nav className='left-panel bg-sky-500 text-white'>
+    <ul className='left-panel-buttons-list'>
+      <Link to='/'><li className={'left-panel-button ' + leftPanelTailwindClasses}>Home</li></Link>
+      <Link to='/catalog'><li className={'left-panel-button ' + leftPanelTailwindClasses}>Catalog</li></Link>
+    </ul>
+  </nav>
+} 
 
 function Header() {
   let headerTailwindClasses = 'hover:bg-blue-900 active:bg-blue-950'
-  return <div className='header bg-blue-800'>
+  return <nav className='header bg-blue-800'>
     <img className={'sidebar-icon header-button ' + headerTailwindClasses} src='./sidebar.svg' alt='sidebar' onClick={handleSidebarIconClick} />
     <img className={'header-button ' + headerTailwindClasses} src='./person.svg' alt='person' />
-  </div>
+  </nav>
 }
 
 function handleSidebarIconClick() {
