@@ -8,7 +8,7 @@ function App() {
       <LeftPanel />
       <div className='main-panel'>
         <Header />
-        <Content />
+        <Outlet />
       </div>
     </div>
   </>
@@ -40,10 +40,4 @@ function handleSidebarIconClick() {
   } else {
     document.querySelector('.left-panel')?.classList.add('sidebar-closed');
   }
-}
-
-function Content() {
-  return <div className='content'>
-    <Outlet />
-  </div>
 }
