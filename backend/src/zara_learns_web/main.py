@@ -1,7 +1,7 @@
-from fastapi import FastAPI, Form, UploadFile, File
+from fastapi import FastAPI, Form, UploadFile, File, HTTPException
 from tortoise.contrib.fastapi import register_tortoise
 from typing import Annotated
-import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import os
 from zara_learns_web.storage.image import LocalImageStorage, ImageStorage
@@ -15,6 +15,19 @@ image_storage: ImageStorage = LocalImageStorage(image_dir_path)
 
 register_tortoise(app, config=TORTOISE_ORM)
 
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 @app.post("/api/create-item")
 async def create_item(
     name: Annotated[str, Form()],
@@ -27,14 +40,14 @@ async def create_item(
 
     image_url = image_storage.store(image)
 
-    product = models.Product(
-        name=name,
-        description=description,
-        price=price,
-        image_url=image_url
-    )
+    try:
+        await models.Product.create(
+            name=name,
+            description=description,
+            price=price,
+            image_url=image_url
+        )
+    except Exception as e:
+        return HTTPException(status_code=500, detail=str(e))
 
-    await product.save()
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    return None

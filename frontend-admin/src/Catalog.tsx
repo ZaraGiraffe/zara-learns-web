@@ -18,25 +18,31 @@ function Catalog() {
     </div>
 }
 
-async function handleNewItem(formData: FormData) {
-    
-    console.info(
-        `Creating new item...
-        formData: ${formData}`
-    );
-
-    const response = await fetch('http://127.0.0.1:8000/api/create-item', {
-        method: 'POST',
-        body: formData,
-    });
-
-    console.info("Response: ", response);
-
-    // TODO: Handle response
-}
-
 function NewItem() {
     let navigate = useNavigate();
+
+    async function handleNewItem(formData: FormData) {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/create-item', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.info("Item created successfully:", data);
+            
+            // Navigate back to catalog on success
+            navigate(-1);
+            
+        } catch (error) {
+            console.error("Error creating item:", error);
+            // TODO: Show error message to user
+        }
+    }
 
     return <form action={handleNewItem} className='content-page'>
         <h1 className='content-page-title'>New Item</h1>
