@@ -8,7 +8,9 @@ function App() {
       <LeftPanel />
       <div className='main-panel'>
         <Header />
-        <Outlet />
+        <div className='content'>
+          <Outlet />
+        </div>
       </div>
     </div>
   </>

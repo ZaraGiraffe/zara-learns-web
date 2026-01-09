@@ -4,6 +4,7 @@ from typing import Annotated
 from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import os
+from typing import List
 from zara_learns_web.storage.image import LocalImageStorage, ImageStorage
 from zara_learns_web.storage import TORTOISE_ORM, models
 
@@ -33,21 +34,33 @@ async def create_item(
     name: Annotated[str, Form()],
     description: Annotated[str, Form()],
     price: Annotated[str, Form()],
-    image: UploadFile = Annotated[UploadFile, File()]
+    images: Annotated[List[UploadFile], File()]
 ):
     print("create item request")
     print("name: ", name, "description: ", description, "price: ", price)
 
-    image_url = image_storage.store(image)
+    image_urls = []
+    for image in images:
+        image_url = image_storage.store(image)
+        image_urls.append(image_url)
 
     try:
         await models.Product.create(
             name=name,
             description=description,
             price=price,
-            image_url=image_url
+            image_urls=image_urls
         )
     except Exception as e:
-        return HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
     return None
+
+@app.get("/api/get-items")
+async def get_items(limit: int = 100, offset: int = 0) -> list[models.ProductBase]:
+    try:
+        products = await models.Product.all().limit(limit).offset(offset)
+        products_base = [product.to_base() for product in products]
+        return products_base
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

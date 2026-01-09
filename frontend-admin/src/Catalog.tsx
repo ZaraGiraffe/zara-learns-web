@@ -1,6 +1,8 @@
 import './Catalog.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { FileUploader } from './FileUploader';
+import { useState } from 'react';
 
 function Catalog() {
     let buttonTailwindClasses = 'flex items-center justify-center px-2';
@@ -20,9 +22,14 @@ function Catalog() {
 
 function NewItem() {
     let navigate = useNavigate();
+    let [images, setImages] = useState<File[]>([]);
 
     async function handleNewItem(formData: FormData) {
         try {
+            images.forEach((image) => {
+                formData.append('images', image);
+            });
+
             const response = await fetch('http://127.0.0.1:8000/api/create-item', {
                 method: 'POST',
                 body: formData,
@@ -48,19 +55,19 @@ function NewItem() {
         <h1 className='content-page-title'>New Item</h1>
         <div className='content-page-item'>
             <label className='content-page-input-label'>Name: </label>
-            <input name='name' type='text' placeholder='Name' className='content-page-text-input' />
+            <input name='name' type='text' placeholder='Name' className='content-page-text-input' required />
         </div>
         <div className='content-page-item'>
             <label className='content-page-input-label'>Description: </label>
-            <input name='description' type='text' placeholder='Description' className='content-page-text-input' />
+            <input name='description' type='text' placeholder='Description' className='content-page-text-input' required />
         </div>
         <div className='content-page-item'>
             <label className='content-page-input-label'>Price: </label>
-            <input name='price' type='number' placeholder='Price' className='content-page-number-input' />
+            <input name='price' type='number' placeholder='Price' className='content-page-number-input' required />
         </div>
         <div className='content-page-item'>
             <label className='content-page-input-label'>Image: </label>
-            <input name='image' type='file' placeholder='Image' accept='image/png, image/jpeg' className='content-page-file-input' />
+            <FileUploader onFilesChange={setImages} />
         </div>
         <div className='content-page-item content-page-bottom-buttons'>
             <button type='submit' className='content-page-button bg-green-500 hover:bg-green-600 active:bg-green-700 text-white'>Create</button>
