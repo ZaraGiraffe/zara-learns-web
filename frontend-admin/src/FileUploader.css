@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+.file-uploader-image-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid theme('colors.gray.300');
+    border-radius: 5px;
+}
+
+.file-uploader-label {
+    display: block;
+    width: fit-content;
+    margin-bottom: 10px;
+    background-color: theme('colors.blue.400');
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.file-uploader-label:hover {
+    background-color: theme('colors.blue.500');
+}
+
+.file-uploader-label:active {
+    background-color: theme('colors.blue.600');
+}
+
+.file-uploader-images {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.file-uploader-input {
+    display: none;
+}
+
+.file-uploader-filename {
+    margin-left: 10px;
+    color: theme('colors.gray.600');
+}
+
+.file-uploader-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.file-uploader-delete-button {
+    padding: 5px 10px;
+    background-color: theme('colors.red.500');
+    color: white;
+    border: 1px solid theme('colors.gray.300');
+    border-radius: 5px;
+}
+
+.file-uploader-delete-button:hover {
+    background-color: theme('colors.red.600');
+}
+
+.file-uploader-delete-button:active {
+    background-color: theme('colors.red.700');
+}

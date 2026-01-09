@@ -3,6 +3,7 @@ from fastapi import UploadFile
 import os
 from typing import List
 from pathlib import Path
+from uuid import uuid4
 
 class ImageStorage(ABC):
     @abstractmethod
@@ -24,7 +25,8 @@ class LocalImageStorage(ImageStorage):
         super().__init__()
 
     def store(self, image: UploadFile) -> str:
-        image_path = self.image_dir_path / image.filename
+        image_id = uuid4().hex
+        image_path = self.image_dir_path / f"{image_id}-{image.filename}"
         open(image_path, "wb").write(
             image.file.read()
         )

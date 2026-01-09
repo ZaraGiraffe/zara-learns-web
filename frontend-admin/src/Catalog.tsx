@@ -1,11 +1,41 @@
 import './Catalog.css';
+import './Table.css';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { FileUploader } from './FileUploader';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+class Item {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    image_urls: string[];
+
+    constructor(id: number, name: string, description: string, price: number, image_urls: string[]) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.image_urls = image_urls;
+    }
+}
+
+const ITEMS_PER_PAGE = 10;
 
 function Catalog() {
     let buttonTailwindClasses = 'flex items-center justify-center px-2';
+
+    let [items, setItems] = useState<Item[]>([]);
+    let [page, setPage] = useState<number>(0);
+    
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8000/api/get-items?limit=${ITEMS_PER_PAGE}&offset=${page * ITEMS_PER_PAGE}`)
+            .then(response => response.json())
+            .then(data => setItems(data))
+            .catch(error => console.error('Error fetching catalog:', error));
+    }, [page]);
+    
     return <div className='catalog-content'>
         <nav className='catalog-buttons bg-gray-200 text-white'>
             <div className='catalog-buttons-group p-1'>
@@ -16,7 +46,31 @@ function Catalog() {
                 
             </div>
         </nav>
-        <div className='catalog-table'></div>
+        <table className='catalog-table'>
+            <thead>
+                <tr className='table-row'>
+                    <th scope="col" className='table-cell text-center min-w-24'>ID</th>
+                    <th scope="col" className='table-cell min-w-32'>Name</th>
+                    <th scope="col" className='table-cell min-w-48'>Description</th>
+                    <th scope="col" className='table-cell text-center min-w-24'>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    items.map(item => (
+                        <tr key={item.id} className='table-row'>
+                            <td scope="row" className='table-cell text-center'>{item.id}</td>
+                            <td className='table-cell'>{item.name}</td>
+                            <td className='table-cell'>{item.description}</td>
+                            <td className='table-cell text-center'>{item.price}</td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </table>
+        <div className='catalog-pagination'>
+
+        </div>
     </div>
 }
 

@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+.catalog-table {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.table-row {
+    border-bottom: 1px solid theme('colors.gray.300');
+    height: 50px;
+}
+
+.table-cell {
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 0;
+}

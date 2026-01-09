@@ -8,6 +8,7 @@ dependencies = [
     "pydantic>=2.12.5",
     "python-multipart>=0.0.21",
     "tortoise-orm[asyncpg]>=0.25.3",
+    "uuid>=1.30",
     "uvicorn>=0.40.0",
 ]
 
